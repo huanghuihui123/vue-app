@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.wrap">
-    <h1>This is an home page</h1>
+    <h1></h1>
   </div>
 </template>
 
@@ -8,12 +8,12 @@
 // @ is an alias to /src
 
 export default {
-  name: "Home"
+  name: "Login"
 };
 </script>
 
 <style lang="less" module>
 .wrap {
-  color: red;
+  color: brown;
 }
 </style>
