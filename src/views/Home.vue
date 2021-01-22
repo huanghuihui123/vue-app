@@ -2,14 +2,18 @@
   <div :class="$style.wrap">
     <h1>This is an home page</h1>
     <p>测试自动构建、自动部署</p>
+    <img src="@/assets/prize3.png" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import { receiveMessage } from "../utils/index";
 export default {
-  name: "Home"
+  name: "Home",
+  created() {
+    receiveMessage();
+  }
 };
 </script>
 
