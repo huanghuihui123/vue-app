@@ -3,12 +3,8 @@
  * @param {*} params
  */
 export const postMessage = params => {
-  try {
-    if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify(params));
-    }
-  } catch (error) {
-    console.log(error);
+  if (window.ReactNativeWebView) {
+    window.ReactNativeWebView.postMessage(JSON.stringify(params));
   }
 };
 
@@ -17,7 +13,10 @@ export const postMessage = params => {
  *
  */
 export const receiveMessage = () => {
-  window.addEventListener("message", res => {
-    console.log(res);
+  // window.onload = function() {
+  document.addEventListener("message", res => {
+    console.log(JSON.parse(res.data));
+    return res.data;
   });
+  // };
 };
