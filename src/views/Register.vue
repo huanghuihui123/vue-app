@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.wrap">
-    <h1>This is an login page</h1>
+    <h1>This is an register page</h1>
     <div>
       <label>账号</label>
       <input type="number" v-model="params.account" />
@@ -9,16 +9,14 @@
       <label>密码</label>
       <input type="password" v-model="params.password" />
     </div>
-    <button @click="handleClickLogin">登录</button>
-    <router-link to="/register">前往注册</router-link>
+    <button @click="handleClickRegister">注册</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import { login } from "../http/api";
+import { register } from "../http/api";
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       params: {
@@ -28,14 +26,13 @@ export default {
     };
   },
   methods: {
-    async handleClickLogin() {
+    async handleClickRegister() {
       try {
-        let res = await login(this.params);
+        let res = await register(this.params);
         console.log(res);
         if (res.code === 200) {
-          alert("登录成功");
-          sessionStorage.setItem("token", res.data.token);
-          this.$router.replace('/home')
+          alert("注册成功");
+          this.$router.replace('/login')
         } else {
           alert(res.message);
         }
@@ -49,6 +46,6 @@ export default {
 
 <style lang="less" module>
 .wrap {
-  color: brown;
+  color: green;
 }
 </style>

@@ -9,38 +9,18 @@
       <input type="file" name="file" multiple @change="handleChangeFile" />
       <button @click="handleClickUpload">上传</button>
     </div>
-    <!-- <div>
-      <input type="file" multiple name="file" @change="handleChangeMultipleFile" />
-      <button @click="handleClickMultipleUpload">上传</button>
-    </div> -->
-    <!-- <form> -->
-    <div>
-      <label>账号</label>
-      <input v-model="params.account" />
-    </div>
-    <div>
-      <label>密码</label>
-      <input v-model="params.password" />
-    </div>
-    <button @click="handleClickRegister">注册</button>
-    <button @click="handleClickLogin">登录</button>
-    <!-- </form> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import { receiveMessage } from "../utils/index";
-import { queryUserList, register, login, uploadFile } from "../http/api";
+import { queryUserList, uploadFile } from "../http/api";
 export default {
   name: "Home",
   data() {
     return {
-      fileList: [],
-      params: {
-        account: "",
-        password: "",
-      },
+      fileList: []
     };
   },
   mounted() {
@@ -84,32 +64,6 @@ export default {
           alert(res.message);
         }
       });
-    },
-    async handleClickRegister() {
-      try {
-        let res = await register(this.params);
-        console.log(res);
-        if (res.code === 200) {
-          alert("注册成功");
-        } else {
-          alert(res.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async handleClickLogin() {
-      try {
-        let res = await login(this.params);
-        console.log(res);
-        if (res.code === 200) {
-          alert("登录成功");
-        } else {
-          alert(res.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
     },
   },
 };

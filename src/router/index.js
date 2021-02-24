@@ -1,22 +1,22 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import { postMessage } from "../utils/index";
+// import { postMessage } from "../utils/index";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/home"
+    redirect: "/home",
   },
   {
     path: "/home",
     name: "Home",
     component: Home,
     meta: {
-      title: "Home"
-    }
+      title: "Home",
+    },
   },
   {
     path: "/login",
@@ -24,46 +24,46 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
     meta: {
-      title: "Login"
-    }
+      title: "Login",
+    },
   },
   {
-    path: "/product",
-    name: "Product",
-    component: () =>
-      import(/* webpackChunkName: "product" */ "../views/Product.vue"),
-    meta: {
-      title: "Product"
-    }
-  },
-  {
-    path: "/about",
-    name: "About",
+    path: "/register",
+    name: "Register",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Register.vue"),
     meta: {
-      title: "About"
-    }
-  }
+      title: "Register",
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
   // ...
-  if (to.meta && to.meta.title) {
-    postMessage({
-      title: to.meta.title
-    });
+  if (to.path == "/login" || to.path == "/register") {
+    next();
+  } else {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      // if (to.meta && to.meta.title) {
+      //   postMessage({
+      //     title: to.meta.title,
+      //   });
+      // }
+      next();
+    } else {
+      router.push('/login')
+    }
   }
-  next();
 });
 
 export default router;
