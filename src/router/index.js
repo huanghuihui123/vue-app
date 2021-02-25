@@ -8,15 +8,15 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/home"
   },
   {
     path: "/home",
     name: "Home",
     component: Home,
     meta: {
-      title: "Home",
-    },
+      title: "Home"
+    }
   },
   {
     path: "/login",
@@ -24,8 +24,8 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
     meta: {
-      title: "Login",
-    },
+      title: "Login"
+    }
   },
   {
     path: "/register",
@@ -36,15 +36,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Register.vue"),
     meta: {
-      title: "Register",
-    },
-  },
+      title: "Register"
+    }
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 router.beforeEach((to, from, next) => {
@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
       // }
       next();
     } else {
-      router.push('/login')
+      router.push("/login");
     }
   }
 });

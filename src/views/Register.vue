@@ -21,8 +21,8 @@ export default {
     return {
       params: {
         account: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   methods: {
@@ -32,15 +32,15 @@ export default {
         console.log(res);
         if (res.code === 200) {
           alert("注册成功");
-          this.$router.replace('/login')
+          this.$router.replace("/login");
         } else {
           alert(res.message);
         }
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,9 +1,9 @@
 import axios from "axios";
-import router from '../router'
+import router from "../router";
 
 const instance = axios.create({
   baseURL: "/api",
-  timeout: 1000,
+  timeout: 1000
 });
 
 // 请求拦截
@@ -24,15 +24,15 @@ instance.interceptors.response.use(
     return response;
   },
   function(error) {
-    console.log(error.response)
+    console.log(error.response);
     if (error.response.status) {
       switch (error.response.status) {
         case 401:
           router.replace({
             path: "/login",
             query: {
-              redirect: router.currentRoute.fullPath,
-            },
+              redirect: router.currentRoute.fullPath
+            }
           });
           break;
         case 403:
@@ -48,8 +48,8 @@ instance.interceptors.response.use(
             router.replace({
               path: "/login",
               query: {
-                redirect: router.currentRoute.fullPath,
-              },
+                redirect: router.currentRoute.fullPath
+              }
             });
           }, 1000);
           break;
@@ -65,10 +65,10 @@ export function get(url, params) {
   return new Promise((resolve, reject) => {
     instance
       .get(url, { params })
-      .then((res) => {
+      .then(res => {
         resolve(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         reject(err.data);
       });
   });
@@ -78,10 +78,10 @@ export function post(url, data) {
   return new Promise((resolve, reject) => {
     instance
       .post(url, data)
-      .then((res) => {
+      .then(res => {
         resolve(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         reject(err.data);
       });
   });
@@ -94,13 +94,13 @@ export function upload(url, data) {
       url,
       data,
       headers: {
-        "content-type": "multipart/form-data",
-      },
+        "content-type": "multipart/form-data"
+      }
     })
-      .then((res) => {
+      .then(res => {
         resolve(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         reject(err.data);
       });
   });

@@ -23,8 +23,8 @@ export default {
     return {
       params: {
         account: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   methods: {
@@ -35,15 +35,15 @@ export default {
         if (res.code === 200) {
           alert("登录成功");
           sessionStorage.setItem("token", res.data.token);
-          this.$router.replace('/home')
+          this.$router.replace("/home");
         } else {
           alert(res.message);
         }
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

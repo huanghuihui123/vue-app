@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     // this.sayHelloToApp();
-    queryUserList().then((res) => {
+    queryUserList().then(res => {
       console.log(res);
     });
   },
@@ -55,7 +55,7 @@ export default {
         }
       }
 
-      uploadFile(formData).then((res) => {
+      uploadFile(formData).then(res => {
         console.log(res);
         if (res.code === 200) {
           this.fileList = [];
@@ -64,8 +64,8 @@ export default {
           alert(res.message);
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
