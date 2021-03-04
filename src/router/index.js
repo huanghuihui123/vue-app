@@ -50,6 +50,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // ...
   if (to.path == "/login" || to.path == "/register") {
+    console.log(111111111111);
     next();
   } else {
     const token = sessionStorage.getItem("token");
