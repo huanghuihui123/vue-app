@@ -1,24 +1,29 @@
 <template>
   <div :class="$style.wrap">
-    <img :class="$style.logo" src="../assets/pig.jpg" alt="logo" />
+    <img :class="$style.logo" src="../assets/logo.png" alt="logo" />
     <van-form @submit="handleClickLogin">
       <van-field
         v-model="params.account"
         name="账号"
         label="账号"
-        placeholder="账号"
-        :rules="[{ required: true, message: '请填写账号' }]"
+        placeholder="请输入账号"
+        :formatter="formatter"
       />
       <van-field
         v-model="params.password"
         type="password"
         name="密码"
         label="密码"
-        placeholder="密码"
-        :rules="[{ required: true, message: '请填写密码' }]"
+        placeholder="请输入密码"
+        :formatter="formatter"
       />
       <div :class="$style.submit_box">
-        <van-button round block type="info" native-type="submit"
+        <van-button
+          round
+          block
+          :disabled="disabled"
+          type="info"
+          native-type="submit"
           >登录</van-button
         >
       </div>
@@ -35,17 +40,40 @@ export default {
   components: {
     [Button.name]: Button,
     [Form.name]: Form,
-    [Field.name]: Field
+    [Field.name]: Field,
   },
   data() {
     return {
       params: {
         account: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
+  computed: {
+    disabled() {
+      if (this.params.account && this.params.password) {
+        return false;
+      }
+      return true;
+    },
+  },
   methods: {
+    formatter(value) {
+      return value.trim();
+      
+    },
+    validator() {
+      if (!this.params.name) {
+        Toast("请输入账号！");
+        return false;
+      }
+      if (!this.params.password) {
+        Toast("请输入密码！");
+        return false;
+      }
+      return true;
+    },
     async handleClickLogin() {
       try {
         let res = await login(this.params);
@@ -60,8 +88,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
